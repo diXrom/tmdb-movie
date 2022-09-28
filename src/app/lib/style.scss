@@ -1,0 +1,27 @@
+.navLink {
+  color: inherit;
+  text-decoration: none;
+  &.active li {
+    background: #a4e2fa;
+  }
+}
+.disabled-link {
+  pointer-events: none;
+}
+body {
+  overflow-y: scroll;
+}
+.MuiPagination-root {
+  .MuiPaginationItem-root {
+    @media (max-width: 500px) {
+      font-size: 17px;
+      padding: 0;
+      min-width: 30px;
+      height: 30px;
+    }
+    @media (max-width: 375px) {
+      font-size: 15px;
+      min-width: 24px;
+    }
+  }
+}
