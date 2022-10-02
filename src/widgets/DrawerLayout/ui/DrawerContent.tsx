@@ -1,6 +1,6 @@
 import { Fragment, memo } from 'react';
 import { List, Typography, Divider, IconButton } from '@mui/material';
-import { ChevronLeft, Widgets, Groups } from '@mui/icons-material';
+import { ChevronLeft, Widgets, Groups, Badge } from '@mui/icons-material';
 
 import { ROUTE_PATH } from 'shared/common/constants';
 import { DrawerHeader } from '../lib/styles';
@@ -13,7 +13,7 @@ type IDrawerContent = {
 
 const DrawerContent = (props: IDrawerContent) => {
   const { open, handleDrawerClose } = props;
-  const { INDEX, ABOUT_US } = ROUTE_PATH;
+  const { INDEX, ABOUT_US, FORMS } = ROUTE_PATH;
 
   return (
     <Fragment>
@@ -32,6 +32,9 @@ const DrawerContent = (props: IDrawerContent) => {
         </ListItem>
         <ListItem text="About Us" open={open} link={ABOUT_US} onClick={handleDrawerClose}>
           <Groups color="primary" />
+        </ListItem>
+        <ListItem text="Forms" open={open} link={FORMS} onClick={handleDrawerClose}>
+          <Badge color="primary" />
         </ListItem>
       </List>
     </Fragment>

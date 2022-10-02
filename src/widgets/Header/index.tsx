@@ -25,7 +25,7 @@ const Header: FC<IHeader> = (props) => {
               </Typography>
             </IconButton>
           </Link>
-          {pathname !== '/about' && <SearchPanel />}
+          {pathname === '/' && <SearchPanel />}
         </Box>
       </Toolbar>
     </BarHeader>

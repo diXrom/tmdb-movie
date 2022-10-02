@@ -1,6 +1,7 @@
 const ROUTE_PATH = {
   INDEX: '/',
   ABOUT_US: 'about',
+  FORMS: 'forms',
   NOT_FOUND: '404',
 };
 
