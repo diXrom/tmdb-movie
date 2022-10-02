@@ -38,4 +38,10 @@ const fadeAnimation = {
   }),
 };
 
-export { slideAnimation, fadeAnimation, motionSettings };
+const initMotion = {
+  initial: 'hidden',
+  animate: 'visible',
+  exit: 'hidden',
+};
+
+export { slideAnimation, fadeAnimation, motionSettings, initMotion };

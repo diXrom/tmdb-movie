@@ -1,32 +1,56 @@
-# Week 1
+# Week 2
 
-## React. Components
+
+## React. Forms
+
+!! Task should be implemented in the school’s private repository !!
+It should be based on the previous task.
 
 ### What should be done:
 
-1. Create a separate branch for this task.
-2. Use CRA with template --typescript.
-3. Set up eslint and prettier so that the project would not build if having errors. Use [configs](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/module01/configs.md) [RU]
-4. Add React-Router version 6. Add header which shows the current page. Also add pages “About Us”, “404”. If user will input unknown route into url – application should redirect to “404”.
-5. Draw the following on the main page:
-* Search Bar.\
-examples:\
-https://studio.uxpincdn.com/studio/wp-content/uploads/2020/09/BlogHeader_SearchBar_1200x600.png \
-https://www.sliderrevolution.com/wp-content/uploads/2021/02/cssheader1.jpg \
-Input value should be saved to LocalStorage during component’s unmount. During the initialization pick the value from LocalStorage and show it.
-* Cards. The more details are on the card – the better.\
-examples: \
-https://www.webdesignerdepot.com/cdn-origin/uploads/2017/01/behance.jpg \
-https://www.webdesignerdepot.com/cdn-origin/uploads/2017/01/rightmove.jpg \
-https://www.webdesignerdepot.com/cdn-origin/uploads/2017/01/awwwards.jpg \
-**In the situation when the access to life cycles of a component is needed or there is a necessity of state – use class components. Using hooks is forbidden at this stage.**
-6. Add tests for components. Mock LocalStorage. Add test for one card, as well as tests for the list of all cards. You can use either React Testing Library or Enzyme, but only one of them. Preferr React Testing Library.
+1. Create a separate branch for this task from previous branch task.
+2. Create a separate route for forms.
+3. Form should be implemented using uncontrolled components
+4. Add functionality to your app:
+   +  Collect information through a form
+   +  You can collect any type of information, but form has to include at least one control of the following types: input, date input, dropdown/select, checkbox, switcher, file upload (image)
 
-All logical parts should be set into separate components.
+    ````  
+    **Example:** 
+    input - name, surname, zip-code;
+    date input - birthday, date of delivery;
+    dropdown/select - list of countries, list of states (User can choose only one element from the list)
+    checkbox - "I consent to my personal data" field, list of extra presents (User can choose several items from the list)
+    switcher - male/female, "I want to receive notifications about promo, sales, etc." / "I don’t want to receive notifications about promo, sales, etc."
+    file upload - profile picture
+    ````  
+
+    Validation should happen after the **Submit** button clicked. In case some field was filled incorrectly, then error messages should be displayed under it. The card mustn’t be created until the user fixes all errors.
+
+    After changing value in input, then reset will happens only for one particular field (not all fields). 
+
+    Submit button should be disabled at initialization (before the first typing), and until the user fixes all errors.
+
+    After the Submit button is clicked, all data from the form has to be displayed as Card in the cards list below form. The confirmation message (with information that the data has been saved) should be displayed, after that form has to be cleared.
+
+    In case the user filled in and submitted the form five times, then five cards have to be displayed under the form.
+
+5. Add tests.
+6. All logic parts should be extracted into components.
+   All data must be stored in a local state of the component.
+   Components should not make calls to APIa.
+   Using redux or any other solutions for state management is prohibited.  
+   **Using any libraries with components or form libraries is prohibited.**  
+
+
 ### Score
 
 The task will be checked by the mentor during the first 6 weeks. Create a Pull Request to the branch of the previous task, for mentor's checking (**DO NOT MERGE**).
 
-1. Tests – **4 points**
-2. eslint, prettier – **2 points**
-3. React App + components and router – **9 points**
+
+1. Tests - **3 points**
+2. Form + Cards - **12 points**
+
+
+If at least one of the requirements is not completed, then the task is evaluated as **0 points**.
+If case of direct DOM manipulation - **0 points**
