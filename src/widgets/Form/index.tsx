@@ -23,7 +23,13 @@ const Form: FC<IForm> = ({ setData }) => {
       variants={fadeAnimation}
       {...initMotion}
     >
-      <Stack component="form" autoComplete="off" spacing={1.5} sx={{ marginY: 2, width: 235 }}>
+      <Stack
+        data-testid="form"
+        component="form"
+        autoComplete="off"
+        spacing={1.5}
+        sx={{ marginY: 2, width: 235 }}
+      >
         <Typography variant="h6" sx={{ alignSelf: 'center' }}>
           Personal data
         </Typography>
@@ -44,13 +50,14 @@ const Form: FC<IForm> = ({ setData }) => {
           onChange={() => setDisabled(false)}
         >
           Upload Photo
-          <input ref={refMap[4].ref} hidden accept="image/*" type="file" />
+          <input data-testid="inputFile" ref={refMap[4].ref} hidden accept="image/*" type="file" />
         </Button>
         <FormHelperText sx={{ color: 'red' }}>
           {refMap[4].valid ? 'Please upload Photo' : ''}
         </FormHelperText>
         <CheckBoxGroup switchRef={refMap[5]} checkboxRef={refMap[6]} setDisabled={setDisabled} />
         <Button
+          data-testid="formSubmit"
           disabled={isDisabled}
           variant="contained"
           onClick={() => submitForm(refMap, setData, setSuccess)}

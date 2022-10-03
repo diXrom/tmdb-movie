@@ -4,7 +4,7 @@ import { Card, CardContent, CardMedia, Typography, Unstable_Grid2 as Grid } from
 import { IPersonList } from './lib/types';
 
 const PersonList: FC<IPersonList> = ({ persons }) => (
-  <Grid container spacing={2} sx={{ width: '100%', mt: 2 }}>
+  <Grid data-testid="personList" container spacing={2} sx={{ width: '100%', mt: 2 }}>
     {persons.map((person) => (
       <Grid xs={12} md={4} lg={3} display="flex" justifyContent="center" key={String(person.name)}>
         <Card sx={{ width: 350 }}>
