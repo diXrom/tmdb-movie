@@ -1,13 +1,12 @@
 import { memo } from 'react';
-import { EntityState } from '@reduxjs/toolkit';
 import { Unstable_Grid2 as Grid } from '@mui/material';
 
 import MovieProgress from 'widgets/MoviesList/ui/MovieProgress';
-import { IMovie } from 'shared/api/lib/types';
+import { IMovie, IMoviesResponses } from 'shared/api/lib/types';
 import MovieItem from './ui/MovieItem';
 import MovieNotFound from './ui/MovieNotFound';
 
-type IMoviesList = { movies: EntityState<IMovie> | undefined; loading: boolean };
+type IMoviesList = { movies: IMoviesResponses | undefined; loading: boolean };
 
 const MoviesList = (props: IMoviesList) => {
   const { movies, loading } = props;
