@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Stack, Typography, Box } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import { IMovie } from 'shared/api/lib/types';
 

@@ -1,6 +1,6 @@
 import { createEntityAdapter } from '@reduxjs/toolkit';
 import { TOKEN } from '../model/constants';
-import { IMovie, IMovies, IMoviesResponses } from './types';
+import { IMovie, IMovies } from './types';
 
 const prepareHeaders = (headers: Headers) => {
   headers.set('Accept', 'application/json');
