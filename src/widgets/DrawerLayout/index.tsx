@@ -9,7 +9,7 @@ import { useDrawer } from './model/hooks';
 import { DrawerHeader, drawlerStyle, ContainerStyle } from './lib/styles';
 
 const DrawerLayout = () => {
-  const props = useDrawer();
+  const { hasFooter, ...props } = useDrawer();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -21,7 +21,7 @@ const DrawerLayout = () => {
         <Container maxWidth="xl" sx={ContainerStyle}>
           <Outlet />
         </Container>
-        <Footer />
+        {hasFooter() && <Footer />}
       </Box>
     </Box>
   );
