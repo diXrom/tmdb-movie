@@ -7,9 +7,9 @@ type IMovieContent = { movie: IMovie };
 const MovieContent = ({ movie }: IMovieContent) => {
   return (
     <Fragment>
-      <Stack sx={{ mt: 1, fontSize: 16 }}>
-        <Typography color="text.secondary" sx={{ fontSize: 16 }}>
-          {movie.overview.length > 400 ? movie.overview.slice(0, 400) + '...' : movie.overview}
+      <Stack sx={{ mt: 1, fontSize: 20 }}>
+        <Typography color="text.secondary" sx={{ fontSize: 18 }}>
+          {movie.overview}
         </Typography>
       </Stack>
     </Fragment>

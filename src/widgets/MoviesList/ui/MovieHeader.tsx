@@ -10,7 +10,7 @@ type IMovieHeader = {
 const MovieHeader = ({ movie }: IMovieHeader) => (
   <Stack sx={{ borderLeft: `4px solid orange`, pl: 2 }}>
     <Stack direction={'row'} spacing={1} sx={{ alignItems: 'flex-start' }}>
-      <Typography variant="h6" sx={{ fontWeight: 'bold', flexGrow: 1 }}>
+      <Typography variant="h5" sx={{ fontWeight: 'bold', flexGrow: 1 }}>
         {movie.title}
       </Typography>
       <Typography sx={{ backgroundColor: 'orange', p: 1, borderRadius: 1 }}>
