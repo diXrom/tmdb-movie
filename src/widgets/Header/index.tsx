@@ -20,7 +20,12 @@ const Header: FC<IHeader> = (props) => {
         <Box sx={HeaderStyle}>
           <Link to="/" className="navLink">
             <IconButton color="secondary" sx={{ opacity: Number(!open) }}>
-              <Typography variant="h5" noWrap component="h1" sx={{ fontWeight: 'bold' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                component="h1"
+                sx={{ fontWeight: 'bold', display: { xs: 'none', md: 'block' } }}
+              >
                 Components
               </Typography>
             </IconButton>
