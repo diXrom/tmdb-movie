@@ -6,7 +6,7 @@ import { fadeAnimation } from 'shared/common/styles';
 
 type IFilmsPagination = {
   page: number;
-  totalPage: number | undefined;
+  totalPage?: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
