@@ -3,6 +3,7 @@ import { Stack, CircularProgress } from '@mui/material';
 const MovieProgress = () => {
   return (
     <Stack
+      data-testid="spinner"
       sx={{
         pt: '200px',
         alignItems: 'center',

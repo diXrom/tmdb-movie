@@ -16,7 +16,12 @@ const MoviesList = (props: IMoviesList) => {
   if (!movies.ids.length) return <MovieNotFound />;
 
   return (
-    <Grid container spacing={2} sx={{ width: '100%', justifyContent: 'center' }}>
+    <Grid
+      data-testid="мoviesList"
+      container
+      spacing={2}
+      sx={{ width: '100%', justifyContent: 'center' }}
+    >
       {movies.ids.map((id, index) => {
         return <MovieItem key={id} movie={movies.entities[id] as IMovie} index={index} />;
       })}

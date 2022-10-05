@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+
 import MoviesList from 'widgets/MoviesList';
 
 const cardsData = {
@@ -46,9 +47,9 @@ describe('CardsList component', () => {
   it('should render two Cards', () => {
     render(<MoviesList movies={cardsData} loading={false} />);
 
-    expect(screen.getAllByText(/Inception/i)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/Interstellar/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByTestId('мovieItem').length).toBe(2);
   });
+
   it('should render zero Cards when data is empty', () => {
     render(<MoviesList movies={{ ids: [], entities: {}, total_pages: 0 }} loading={false} />);
 

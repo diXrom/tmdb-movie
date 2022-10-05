@@ -24,6 +24,6 @@ describe('Card component', () => {
   it('should render Card', () => {
     render(<MovieItem movie={cardData} index={1} />);
 
-    expect(screen.getAllByText(/Inception/i)[0]).toBeInTheDocument();
+    expect(screen.getByTestId('мovieItem')).toBeInTheDocument();
   });
 });

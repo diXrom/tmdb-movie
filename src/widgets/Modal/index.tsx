@@ -8,6 +8,7 @@ import { IModalProps } from './lib/types';
 const ModalInfo: FC<IModalProps> = ({ open, handleClose, children }) => {
   return (
     <Modal
+      data-testid="modal"
       open={open}
       onClose={handleClose}
       closeAfterTransition

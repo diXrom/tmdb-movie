@@ -27,9 +27,13 @@ const SearchPanel = () => {
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
-        <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search', ref }} />
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ 'aria-label': 'search', ref, 'data-testid': 'inputSearch' }}
+        />
       </Search>
       <Button
+        data-testid="btnSearch"
         variant="outlined"
         color="secondary"
         onClick={() => dispatch(setSearch(ref.current?.value || ''))}

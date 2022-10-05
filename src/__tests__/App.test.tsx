@@ -9,7 +9,7 @@ import MainPage from 'pages/MainPage';
 import PageNotFound from 'pages/PageNotFound';
 import DrawerLayout from 'widgets/DrawerLayout';
 import { ROUTE_PATH } from 'shared/common/constants';
-import { store } from 'shared/store';
+import { setupStore } from 'shared/store';
 
 describe('App component', () => {
   it('should render App', () => {
@@ -27,7 +27,7 @@ describe('App component', () => {
 
   it('should render PageNotFound page when wrong path', async () => {
     render(
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <MemoryRouter initialEntries={['/forms']}>
           <Routes>
             <Route path={ROUTE_PATH.INDEX} element={<DrawerLayout />}>

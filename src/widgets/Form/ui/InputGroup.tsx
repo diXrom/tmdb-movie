@@ -8,7 +8,7 @@ const InputGroup: FC<IInputGroup> = ({ inputRef, setDisabled, label, ...props })
     label={label}
     variant="standard"
     inputRef={inputRef.ref}
-    inputProps={{ 'data-Testid': `input${label.replace(/\s/g, '')}` }}
+    inputProps={{ 'data-testid': `input${label.replace(/\s/g, '')}` }}
     onChange={() => setDisabled(false)}
     helperText={inputRef.valid ? `Please enter your ${label}` : ''}
     {...props}
