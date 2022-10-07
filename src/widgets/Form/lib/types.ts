@@ -1,23 +1,25 @@
 import { InputLabelProps } from '@mui/material';
 import { SlideProps } from '@mui/material/Slide';
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction } from 'react';
+import { Dayjs } from 'dayjs';
 
 import { getPersonData } from './util';
-
-type IRefInput = HTMLInputElement;
 
 type IPersonData = ReturnType<typeof getPersonData>;
 
 type ITransitionUp = Omit<SlideProps, 'direction'>;
 
-interface IInput {
-  name: keyof HTMLInputElement;
+interface IInputState {
+  value: boolean | string | File | Dayjs | null | undefined;
   valid: boolean;
-  ref: React.RefObject<HTMLInputElement>;
-  setValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+interface IInput {
+  name: string;
+  input: IInputState;
+  setInput: Dispatch<SetStateAction<IInputState>>;
+}
 interface IForm {
-  setData: React.Dispatch<React.SetStateAction<IPersonData[]>>;
+  setData: Dispatch<SetStateAction<IPersonData[]>>;
 }
 
 interface ISelectGroup {
@@ -26,32 +28,30 @@ interface ISelectGroup {
 }
 
 interface IInputGroup {
-  inputRef: IInput;
+  state: IInput;
   label: string;
-  setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   InputLabelProps?: Partial<InputLabelProps> | undefined;
-  type?: React.HTMLInputTypeAttribute | undefined;
+  type?: HTMLInputTypeAttribute | undefined;
 }
 
 interface ICheckBoxGroup {
-  switchRef: IInput;
-  checkboxRef: IInput;
-  setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  switchState: IInput;
+  checkboxState: IInput;
 }
 
 interface ISuccessSnack {
   success: boolean;
-  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setSuccess: Dispatch<SetStateAction<boolean>>;
 }
 
 export type {
   IInput,
   IForm,
   IPersonData,
-  IRefInput,
   ISelectGroup,
   IInputGroup,
   ICheckBoxGroup,
   ISuccessSnack,
   ITransitionUp,
+  IInputState,
 };

@@ -1,19 +1,22 @@
 import { FC, memo } from 'react';
 import { motion } from 'framer-motion';
-import { Button, FormHelperText, Paper, Stack, Typography } from '@mui/material';
+import { Button, Paper, Stack, Typography } from '@mui/material';
 
 import { fadeAnimation, initMotion } from 'shared/common/styles';
 import { FormStyle } from './lib/styles';
 import { useForm } from './model/hooks';
-import { submitForm } from './lib/util';
 import { IForm } from './lib/types';
-import CheckBoxGroup from './ui/CheckBoxGroup';
 import SelectGroup from './ui/SelectGroup';
+import CheckBoxGroup from './ui/CheckBoxGroup';
+import { getValue, submitForm } from './lib/util';
+
 import InputGroup from './ui/InputGroup';
 import SuccessSnack from './ui/SuccessSnack';
+import DateGrourp from './ui/DateGrourp';
+import UploadGroup from './ui/UploadGroup';
 
 const Form: FC<IForm> = ({ setData }) => {
-  const { refMap, success, setSuccess, isDisabled, setDisabled } = useForm();
+  const { inputMap, success, setSuccess } = useForm();
 
   return (
     <Paper
@@ -27,40 +30,24 @@ const Form: FC<IForm> = ({ setData }) => {
         data-testid="form"
         component="form"
         autoComplete="off"
-        spacing={1.5}
+        spacing={1}
         sx={{ marginY: 2, width: 235 }}
       >
         <Typography variant="h6" sx={{ alignSelf: 'center' }}>
           Personal data
         </Typography>
-        <InputGroup inputRef={refMap[0]} setDisabled={setDisabled} label="First Name" />
-        <InputGroup inputRef={refMap[1]} setDisabled={setDisabled} label="Last Name" />
-        <InputGroup
-          inputRef={refMap[2]}
-          setDisabled={setDisabled}
-          label="Birthday"
-          InputLabelProps={{ shrink: true }}
-          type="date"
-        />
-        <SelectGroup selectRef={refMap[3]} setDisabled={setDisabled} />
+        <InputGroup state={inputMap[0]} label="First Name" />
+        <InputGroup state={inputMap[1]} label="Last Name" />
+        <DateGrourp state={inputMap[2]} label="Birthday" />
+        <SelectGroup state={inputMap[3]} label="Country" />
+        <CheckBoxGroup switchState={inputMap[5]} checkboxState={inputMap[6]} />
+        <UploadGroup state={inputMap[4]} />
         <Button
-          variant="contained"
-          component="label"
-          color={refMap[4].valid ? 'error' : 'primary'}
-          onChange={() => setDisabled(false)}
-        >
-          Upload Photo
-          <input data-testid="inputFile" ref={refMap[4].ref} hidden accept="image/*" type="file" />
-        </Button>
-        <FormHelperText sx={{ color: 'red' }}>
-          {refMap[4].valid ? 'Please upload Photo' : ''}
-        </FormHelperText>
-        <CheckBoxGroup switchRef={refMap[5]} checkboxRef={refMap[6]} setDisabled={setDisabled} />
-        <Button
+          sx={{ height: 62 }}
           data-testid="formSubmit"
-          disabled={isDisabled}
+          disabled={!inputMap.some((item) => getValue(item))}
           variant="contained"
-          onClick={() => submitForm(refMap, setData, setSuccess)}
+          onClick={() => submitForm(inputMap, setData, setSuccess)}
         >
           Submit
         </Button>

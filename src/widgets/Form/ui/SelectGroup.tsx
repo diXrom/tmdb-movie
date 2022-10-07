@@ -1,26 +1,25 @@
 import { FC, memo } from 'react';
-import { FormControl, NativeSelect, FormHelperText } from '@mui/material';
+import { FormControl, Select, MenuItem, FormHelperText, InputLabel } from '@mui/material';
 
-import { ISelectGroup } from '../lib/types';
+import { IInputGroup } from '../lib/types';
 
-const SelectGroup: FC<ISelectGroup> = ({ selectRef, setDisabled }) => (
-  <FormControl error={selectRef.valid}>
-    <NativeSelect
-      inputProps={{ name: 'Country' }}
-      variant="standard"
-      inputRef={selectRef.ref}
-      defaultValue=""
-      onChange={() => setDisabled(false)}
+type ISelectGroup = IInputGroup;
+
+const SelectGroup: FC<ISelectGroup> = ({ state: { input, setInput }, label }) => (
+  <FormControl error={input.valid}>
+    <InputLabel>{label}</InputLabel>
+    <Select
+      inputProps={{ 'data-testid': `input${label.replace(/\s/g, '')}` }}
+      label={label}
+      value={input.value}
+      onChange={({ target }) => setInput(() => ({ value: target.value, valid: !target.value }))}
     >
-      <option value={''}>Choose country</option>
-      <option value={'Kazakhstan'}>Kazakhstan</option>
-      <option value={'Russia'}>Russia</option>
-      <option value={'Belarus'}>Belarus</option>
-      <option value={'Ukraine'}>Ukraine</option>
-    </NativeSelect>
-    <FormHelperText sx={{ ml: 0 }}>
-      {selectRef.valid ? 'Please enter your Country' : ''}
-    </FormHelperText>
+      <MenuItem value={'Kazakhstan'}>Kazakhstan</MenuItem>
+      <MenuItem value={'Russia'}>Russia</MenuItem>
+      <MenuItem value={'Belarus'}>Belarus</MenuItem>
+      <MenuItem value={'Ukraine'}>Ukraine</MenuItem>
+    </Select>
+    <FormHelperText>{input.valid ? 'Please enter your Country' : ''}</FormHelperText>
   </FormControl>
 );
 

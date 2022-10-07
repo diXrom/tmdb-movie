@@ -1,29 +1,36 @@
 import { FC, memo } from 'react';
-import { FormGroup, FormControlLabel, Switch, FormHelperText } from '@mui/material';
+import { FormGroup, FormControlLabel, Switch, Checkbox, FormHelperText } from '@mui/material';
 
 import { ICheckBoxGroup } from '../lib/types';
 
-const CheckBoxGroup: FC<ICheckBoxGroup> = ({ switchRef, checkboxRef, setDisabled }) => (
+const CheckBoxGroup: FC<ICheckBoxGroup> = ({ switchState, checkboxState }) => (
   <FormGroup>
     <FormControlLabel
       data-testid="inputSwitch"
       label="I read the rules"
-      control={<Switch inputRef={switchRef.ref} onChange={() => setDisabled(false)} />}
-    />
-    <FormControlLabel
-      sx={{ pl: 1 }}
       control={
-        <input
-          data-testid="inputCheckbox"
-          ref={checkboxRef.ref}
-          type="checkbox"
-          onChange={() => setDisabled(false)}
+        <Switch
+          checked={switchState.input.value as boolean}
+          onChange={({ target }) =>
+            switchState.setInput(() => ({ value: target.checked, valid: !target.checked }))
+          }
         />
       }
-      label="I agree with rules"
     />
-    <FormHelperText sx={{ color: 'red' }}>
-      {switchRef.valid || checkboxRef.valid ? 'Please read and agree with rules' : ''}
+    <FormControlLabel
+      data-testid="inputSwitch"
+      label="I agree with rules"
+      control={
+        <Checkbox
+          checked={checkboxState.input.value as boolean}
+          onChange={({ target }) =>
+            checkboxState.setInput(() => ({ value: target.checked, valid: !target.checked }))
+          }
+        />
+      }
+    />
+    <FormHelperText sx={{ color: 'red', pl: '14px' }}>
+      {checkboxState.input.valid || checkboxState.input.valid ? 'Please read/agree with rules' : ''}
     </FormHelperText>
   </FormGroup>
 );

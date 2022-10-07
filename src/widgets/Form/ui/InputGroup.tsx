@@ -2,15 +2,14 @@ import { FC, memo } from 'react';
 import { TextField } from '@mui/material';
 import { IInputGroup } from '../lib/types';
 
-const InputGroup: FC<IInputGroup> = ({ inputRef, setDisabled, label, ...props }) => (
+const InputGroup: FC<IInputGroup> = ({ state: { input, setInput }, label, ...props }) => (
   <TextField
-    error={inputRef.valid}
+    error={input.valid}
     label={label}
-    variant="standard"
-    inputRef={inputRef.ref}
+    value={input.value}
     inputProps={{ 'data-testid': `input${label.replace(/\s/g, '')}` }}
-    onChange={() => setDisabled(false)}
-    helperText={inputRef.valid ? `Please enter your ${label}` : ''}
+    onChange={({ target }) => setInput(() => ({ value: target.value, valid: !target.value }))}
+    helperText={input.valid ? `Please enter your ${label}` : ''}
     {...props}
   />
 );

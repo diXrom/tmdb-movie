@@ -1,27 +1,26 @@
-import { useState, useRef } from 'react';
-import { IInput, IRefInput } from '../lib/types';
+import { useState } from 'react';
+import { IInput, IInputState } from '../lib/types';
 
 const useForm = () => {
-  const [isDisabled, setDisabled] = useState(true);
+  const [inputName, setName] = useState<IInputState>({ value: '', valid: false });
+  const [inputSurname, setSurname] = useState<IInputState>({ value: '', valid: false });
+  const [inputDate, setDate] = useState<IInputState>({ value: null, valid: false });
+  const [inputSelect, setSelect] = useState<IInputState>({ value: '', valid: false });
+  const [inputUpload, setUpload] = useState<IInputState>({ value: null, valid: false });
+  const [inputSwitch, setSwitch] = useState<IInputState>({ value: false, valid: false });
+  const [inputCheckbox, setCheckbox] = useState<IInputState>({ value: false, valid: false });
   const [success, setSuccess] = useState(false);
-  const [validName, setValidName] = useState(false);
-  const [validSurname, setValidSurname] = useState(false);
-  const [validDate, setValidDate] = useState(false);
-  const [validSelect, setValidSelect] = useState(false);
-  const [validUpload, setValidUpload] = useState(false);
-  const [validSwitch, setValidSwitch] = useState(false);
-  const [validCheck, setValidCheck] = useState(false);
 
-  const refMap: IInput[] = [
-    { name: 'value', ref: useRef<IRefInput>(null), valid: validName, setValid: setValidName },
-    { name: 'value', ref: useRef<IRefInput>(null), valid: validSurname, setValid: setValidSurname },
-    { name: 'value', ref: useRef<IRefInput>(null), valid: validDate, setValid: setValidDate },
-    { name: 'value', ref: useRef<IRefInput>(null), valid: validSelect, setValid: setValidSelect },
-    { name: 'value', ref: useRef<IRefInput>(null), valid: validUpload, setValid: setValidUpload },
-    { name: 'checked', ref: useRef<IRefInput>(null), valid: validSwitch, setValid: setValidSwitch },
-    { name: 'checked', ref: useRef<IRefInput>(null), valid: validCheck, setValid: setValidCheck },
+  const inputMap: IInput[] = [
+    { name: 'input', input: inputName, setInput: setName },
+    { name: 'input', input: inputSurname, setInput: setSurname },
+    { name: 'date', input: inputDate, setInput: setDate },
+    { name: 'input', input: inputSelect, setInput: setSelect },
+    { name: 'file', input: inputUpload, setInput: setUpload },
+    { name: 'checked', input: inputSwitch, setInput: setSwitch },
+    { name: 'checked', input: inputCheckbox, setInput: setCheckbox },
   ];
-  return { refMap, isDisabled, setDisabled, success, setSuccess };
+  return { inputMap, success, setSuccess };
 };
 
 export { useForm };

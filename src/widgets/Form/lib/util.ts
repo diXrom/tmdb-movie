@@ -1,21 +1,18 @@
+import dayjs from 'dayjs';
 import { Dispatch, SetStateAction } from 'react';
-import { switchClassName } from './styles';
 import { IInput, IPersonData } from './types';
 
-const toggleSwitch = (input: IInput) => {
-  if (input.ref.current?.parentElement) {
-    input.ref.current.parentElement.className = switchClassName;
-  }
+const getValue = ({ name, input }: IInput) => {
+  if (name === 'date') return (input.value as dayjs.Dayjs)?.year() || null;
+  return input.value;
 };
 
-const getValue = (input: IInput) => input.ref.current?.[input.name];
-
 const getPersonData = (arr: IInput[]) => ({
-  name: getValue(arr[0]),
-  surName: getValue(arr[1]),
-  birthday: getValue(arr[2]),
-  country: getValue(arr[3]),
-  img: arr[4].ref.current?.files?.[0],
+  name: arr[0].input.value,
+  surName: arr[1].input.value,
+  birthday: new Date((arr[2].input.value as dayjs.Dayjs).valueOf()).toLocaleDateString(),
+  country: arr[3].input.value,
+  img: arr[4].input.value,
 });
 
 const submitForm = (
@@ -23,19 +20,19 @@ const submitForm = (
   setData: Dispatch<SetStateAction<IPersonData[]>>,
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  arr.forEach((input) => (getValue(input) ? input.setValid(false) : input.setValid(true)));
-  if (!arr.every((input) => getValue(input))) return;
+  arr.forEach((item) => getValue(item) || item.setInput((state) => ({ ...state, valid: true })));
+  if (!arr.every((item) => getValue(item))) return;
 
   setData((state) => [...state, getPersonData(arr)]);
   setSuccess(true);
 
-  arr.forEach((input, i) => {
-    if (i === 5) toggleSwitch(arr[5]);
-    if (input.ref.current) {
-      input.ref.current.value = '';
-      input.ref.current.checked = false;
-    }
+  arr.forEach(({ name, input }) => {
+    if (name === 'date') input.value = null;
+    if (name === 'input') input.value = '';
+    if (name === 'checked') input.value = false;
+    if (name === 'file') input.value = null;
   });
+  console.log(arr);
 };
 
-export { submitForm, getPersonData, getValue, toggleSwitch };
+export { getPersonData, submitForm, getValue };
