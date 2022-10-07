@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Form from 'widgets/Form';
 
@@ -33,7 +33,7 @@ describe('Form component', () => {
     expect(screen.getByText(/Please enter your Birthday/i)).toBeInTheDocument();
     expect(screen.getByText(/Please enter your Country/i)).toBeInTheDocument();
     expect(screen.getByText(/Please upload Photo/i)).toBeInTheDocument();
-    expect(screen.getByText(/Please read and agree with rules/i)).toBeInTheDocument();
+    expect(screen.getByText(/Please read\/agree with rules/i)).toBeInTheDocument();
   });
 
   it('should render input text First Name', async () => {
@@ -62,31 +62,22 @@ describe('Form component', () => {
 
     expect(dateInput).toBeInTheDocument();
 
-    await userEvent.type(dateInput, '2022-10-03');
-    expect(dateInput).toHaveValue('2022-10-03');
+    await userEvent.type(dateInput, '01/01/2000');
+    expect(dateInput).toHaveValue('01/01/2000');
   });
 
   it('should render input select', async () => {
     render(<Form setData={jest.fn()} />);
-    const selectInput = screen.getByRole('combobox');
-    const selectOption = screen.getByRole('option', { name: 'Kazakhstan' }) as HTMLOptionElement;
+    const selectInput = screen.getByTestId('inputCountry');
 
     expect(selectInput).toBeInTheDocument();
 
-    await userEvent.selectOptions(selectInput, selectOption);
-    expect(selectOption.selected).toBe(true);
-  });
+    await userEvent.click(within(selectInput).getByRole('button'));
+    const listbox = within(screen.getByRole('presentation')).getByRole('listbox');
+    const options = within(listbox).getAllByRole('option');
+    const optionValues = options.map((li) => li.getAttribute('data-value'));
 
-  it('should render input file', async () => {
-    render(<Form setData={jest.fn()} />);
-    const file = new File(['img'], 'img.png', { type: 'image/png' });
-    const fileInput = screen.getByTestId('inputFile') as HTMLInputElement;
-
-    await userEvent.upload(fileInput, file);
-
-    expect(fileInput.files).toHaveLength(1);
-    expect(fileInput.files && fileInput.files[0]).toStrictEqual(file);
-    expect(fileInput.files && fileInput.files.item(0)).toStrictEqual(file);
+    expect(optionValues).toEqual(['Kazakhstan', 'Russia', 'Belarus', 'Ukraine']);
   });
 
   it('should render input switch', async () => {
@@ -104,12 +95,26 @@ describe('Form component', () => {
 
   it('should render input checkbox', async () => {
     render(<Form setData={jest.fn()} />);
-    const checkboxInput = screen.getByTestId('inputCheckbox');
+    const checkboxInput = screen
+      .getByTestId('inputCheckbox')
+      .querySelector('input[type="checkbox"]') as HTMLInputElement;
 
     expect(checkboxInput).toBeInTheDocument();
     expect(checkboxInput).toHaveProperty('checked', false);
 
     await userEvent.click(checkboxInput);
     expect(checkboxInput).toHaveProperty('checked', true);
+  });
+
+  it('should render input file', async () => {
+    render(<Form setData={jest.fn()} />);
+    const file = new File(['img'], 'img.png', { type: 'image/png' });
+    const fileInput = screen.getByTestId('inputFile') as HTMLInputElement;
+
+    await userEvent.upload(fileInput, file);
+
+    expect(fileInput.files).toHaveLength(1);
+    expect(fileInput.files && fileInput.files[0]).toStrictEqual(file);
+    expect(fileInput.files && fileInput.files.item(0)).toStrictEqual(file);
   });
 });

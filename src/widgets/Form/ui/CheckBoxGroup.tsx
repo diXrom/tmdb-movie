@@ -18,7 +18,7 @@ const CheckBoxGroup: FC<ICheckBoxGroup> = ({ switchState, checkboxState }) => (
       }
     />
     <FormControlLabel
-      data-testid="inputSwitch"
+      data-testid="inputCheckbox"
       label="I agree with rules"
       control={
         <Checkbox

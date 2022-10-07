@@ -9,7 +9,7 @@ const SelectGroup: FC<ISelectGroup> = ({ state: { input, setInput }, label }) =>
   <FormControl error={input.valid}>
     <InputLabel>{label}</InputLabel>
     <Select
-      inputProps={{ 'data-testid': `input${label.replace(/\s/g, '')}` }}
+      data-testid={`input${label.replace(/\s/g, '')}`}
       label={label}
       value={input.value}
       onChange={({ target }) => setInput(() => ({ value: target.value, valid: !target.value }))}
