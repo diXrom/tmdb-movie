@@ -4,14 +4,27 @@ import { Card, CardContent, CardMedia, Typography, Unstable_Grid2 as Grid } from
 import { IPersonList } from './lib/types';
 
 const PersonList: FC<IPersonList> = ({ persons }) => (
-  <Grid data-testid="personList" container spacing={2} sx={{ width: '100%', mt: 2 }}>
+  <Grid
+    data-testid="personList"
+    container
+    spacing={2}
+    sx={{ width: '100%', mt: 2, justifyContent: 'center' }}
+  >
     {persons.map((person) => (
-      <Grid xs={12} md={4} lg={3} display="flex" justifyContent="center" key={String(person.name)}>
-        <Card sx={{ width: 350 }}>
+      <Grid
+        xs={12}
+        md={6}
+        lg={4}
+        xl={3}
+        display="flex"
+        justifyContent="center"
+        key={String(person.name)}
+      >
+        <Card sx={{ width: 300 }}>
           <CardMedia
             component="img"
             height="300"
-            image={person.img ? URL.createObjectURL(person.img) : ''}
+            image={person.img ? URL.createObjectURL(person.img as File) : ''}
             alt="photo"
           />
           <CardContent>
@@ -19,10 +32,10 @@ const PersonList: FC<IPersonList> = ({ persons }) => (
               {`${String(person.name)} ${String(person.surName)}`}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {String(person.birthday)}
+              {`Birthday: ${String(person.birthday)}`}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {String(person.country)}
+              {`Country: ${String(person.country)}`}
             </Typography>
           </CardContent>
         </Card>
