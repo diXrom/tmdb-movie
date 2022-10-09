@@ -1,29 +1,32 @@
 import { ChangeEvent, memo } from 'react';
-import { Box, Pagination } from '@mui/material';
+import { Pagination, Stack } from '@mui/material';
+
+import Filters from './Filters';
+import Pages from './Pages';
 import { motion } from 'framer-motion';
+import { fadeAnimation, initMotion } from 'shared/common/styles';
 
-import { fadeAnimation } from 'shared/common/styles';
-
-type IFilmsPagination = {
+type IMoviesControl = {
   page: number;
   totalPage?: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const FilmsPagination = ({ page, totalPage, setPage }: IFilmsPagination) => {
+const MoviesControl = ({ page, totalPage, setPage }: IMoviesControl) => {
   const handleChange = (e: ChangeEvent<unknown>, value: number) => setPage(value);
 
   if (!totalPage) return null;
 
   return (
-    <Box
+    <Stack
+      direction={'row'}
+      spacing={1}
       component={motion.div}
       variants={fadeAnimation}
       custom={1}
-      initial="hidden"
-      animate="visible"
-      exit="hidden"
+      {...initMotion}
     >
+      <Pages />
       <Pagination
         color="primary"
         count={totalPage && totalPage > 20 ? 20 : totalPage}
@@ -33,8 +36,9 @@ const FilmsPagination = ({ page, totalPage, setPage }: IFilmsPagination) => {
         size="large"
         sx={{ display: 'flex', justifyContent: 'center' }}
       />
-    </Box>
+      <Filters />
+    </Stack>
   );
 };
 
-export default memo(FilmsPagination);
+export default memo(MoviesControl);

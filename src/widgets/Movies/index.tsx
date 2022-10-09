@@ -1,17 +1,17 @@
-import { memo, useState } from 'react';
+import { memo, useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Stack, Typography } from '@mui/material';
 
 import MoviesList from 'widgets/MoviesList';
-import { fadeAnimation } from 'shared/common/styles';
-import { useAppSelector } from 'shared/store/model/hooks';
+import { fadeAnimation, initMotion } from 'shared/common/styles';
+import { Context } from 'shared/storeContext';
 import { useGetMoviesQuery, useSearchMoviesQuery } from 'shared/api';
-import FilmsPagination from './ui/FilmsPagination';
+import MoviesControl from './ui/MoviesControl';
 
 const Movies = () => {
+  const { filter: sort_by, search: query } = useContext(Context)!;
   const [page, setPage] = useState(1);
-  const query = useAppSelector((state) => state.moviesSlice.search);
-  const { data: movies, isFetching: isLoading } = useGetMoviesQuery({ page });
+  const { data: movies, isFetching: isLoading } = useGetMoviesQuery({ page, sort_by });
   const { data: search, isFetching } = useSearchMoviesQuery({ query, page }, { skip: !query });
 
   return (
@@ -27,14 +27,12 @@ const Movies = () => {
         sx={{ fontWeight: 'bold' }}
         component={motion.h4}
         variants={fadeAnimation}
-        initial="hidden"
-        animate="visible"
-        exit="hidden"
+        {...initMotion}
       >
         Movies
       </Typography>
-      <Stack spacing={2} sx={{ marginY: 2, justifyContent: 'center', alignItems: 'center' }}>
-        <FilmsPagination
+      <Stack spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+        <MoviesControl
           page={page}
           setPage={setPage}
           totalPage={query ? search?.total_pages : movies?.total_pages}
