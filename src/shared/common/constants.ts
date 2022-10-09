@@ -2,6 +2,7 @@ const ROUTE_PATH = {
   INDEX: '/',
   ABOUT_US: 'about',
   FORMS: 'forms',
+  MOVIE: 'movie',
   NOT_FOUND: '404',
 };
 

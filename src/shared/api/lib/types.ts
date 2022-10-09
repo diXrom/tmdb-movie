@@ -28,8 +28,10 @@ interface IMovies {
 
 interface IMoviesQuery {
   page: number;
+  sort_by: string;
 }
-interface ISearchQuery extends IMoviesQuery {
+interface ISearchQuery {
+  page: number;
   query: string;
 }
 
