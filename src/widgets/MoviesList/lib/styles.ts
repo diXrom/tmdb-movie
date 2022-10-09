@@ -1,4 +1,5 @@
 const cardMovieStyle = {
+  mt: 2,
   width: { xs: 450, md: 700, xl: 1000 },
   display: 'grid',
   gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
@@ -7,4 +8,12 @@ const cardMovieStyle = {
   background: 'inherit',
 };
 
-export { cardMovieStyle };
+const movieContentStyle = {
+  mt: 1,
+  fontSize: 20,
+  alignContent: 'space-between',
+  height: '100%',
+  justifyContent: 'space-between',
+};
+
+export { cardMovieStyle, movieContentStyle };
