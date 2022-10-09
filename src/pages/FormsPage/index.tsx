@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Stack, Typography } from '@mui/material';
 
 import Form from 'widgets/Form';
 import PersonList from 'widgets/PersonList';
-import { IPersonData } from 'widgets/Form/lib/types';
 import { fadeAnimation, initMotion } from 'shared/common/styles';
+import { Context } from 'shared/storeContext';
 
 const FormsPage = () => {
-  const [persons, setPersons] = useState<IPersonData[]>([]);
+  const { persons, setPerson } = useContext(Context)!;
 
   return (
     <Stack
@@ -27,7 +27,7 @@ const FormsPage = () => {
       >
         Forms
       </Typography>
-      <Form setData={setPersons} />
+      <Form setData={setPerson} />
       <PersonList persons={persons} />
     </Stack>
   );

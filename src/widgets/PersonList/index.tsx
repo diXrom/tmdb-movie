@@ -18,7 +18,7 @@ const PersonList: FC<IPersonList> = ({ persons }) => (
         xl={3}
         display="flex"
         justifyContent="center"
-        key={String(person.name)}
+        key={`${person.name}${Math.random()}`}
       >
         <Card sx={{ width: 300 }}>
           <CardMedia

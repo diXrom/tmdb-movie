@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { Dispatch, SetStateAction } from 'react';
 import { IInput, IPersonData } from './types';
 
 const getValue = ({ name, input }: IInput) => {
@@ -17,13 +16,13 @@ const getPersonData = (arr: IInput[]) => ({
 
 const submitForm = (
   arr: IInput[],
-  setData: Dispatch<SetStateAction<IPersonData[]>>,
+  setData: (payload: IPersonData) => void,
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   arr.forEach((item) => getValue(item) || item.setInput((state) => ({ ...state, valid: true })));
   if (!arr.every((item) => getValue(item))) return;
 
-  setData((state) => [...state, getPersonData(arr)]);
+  setData(getPersonData(arr));
   setSuccess(true);
 
   arr.forEach(({ name, input }) => {
@@ -32,7 +31,6 @@ const submitForm = (
     if (name === 'checked') input.value = false;
     if (name === 'file') input.value = null;
   });
-  console.log(arr);
 };
 
 export { getPersonData, submitForm, getValue };

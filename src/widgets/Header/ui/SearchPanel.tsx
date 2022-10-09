@@ -1,15 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-import { useAppDispatch } from 'shared/store/model/hooks';
-import { setSearch } from 'shared/store/slices/moviesSlice';
 import { Search, SearchIconWrapper, StyledInputBase } from '../lib/styles';
 import { STORAGE_KEY } from 'shared/common/constants';
+import { Context } from 'shared/storeContext';
 
 const SearchPanel = () => {
-  const dispatch = useAppDispatch();
+  const { setSearch } = useContext(Context)!;
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -36,7 +35,7 @@ const SearchPanel = () => {
         data-testid="btnSearch"
         variant="outlined"
         color="secondary"
-        onClick={() => dispatch(setSearch(ref.current?.value || ''))}
+        onClick={() => setSearch(ref.current?.value || '')}
       >
         Search
       </Button>
@@ -44,11 +43,11 @@ const SearchPanel = () => {
         variant="outlined"
         color="secondary"
         onClick={() => {
-          dispatch(setSearch(''));
+          setSearch('');
           if (ref.current) ref.current.value = '';
         }}
       >
-        Popular
+        Reset
       </Button>
     </Stack>
   );

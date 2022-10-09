@@ -19,7 +19,7 @@ interface IInput {
   setInput: Dispatch<SetStateAction<IInputState>>;
 }
 interface IForm {
-  setData: Dispatch<SetStateAction<IPersonData[]>>;
+  setData: (payload: IPersonData) => void;
 }
 
 interface ISelectGroup {
