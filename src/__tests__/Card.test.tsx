@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 import MovieItem from 'widgets/MoviesList/ui/MovieItem';
 
@@ -22,7 +23,11 @@ const cardData = {
 
 describe('Card component', () => {
   it('should render Card', () => {
-    render(<MovieItem movie={cardData} index={1} />);
+    render(
+      <MemoryRouter>
+        <MovieItem movie={cardData} index={1} />
+      </MemoryRouter>
+    );
 
     expect(screen.getByTestId('мovieItem')).toBeInTheDocument();
   });

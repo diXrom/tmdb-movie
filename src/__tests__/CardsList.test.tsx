@@ -1,4 +1,6 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import StoreContext from 'widgets/Context';
 
 import MoviesList from 'widgets/MoviesList';
 
@@ -45,13 +47,25 @@ const cardsData = {
 
 describe('CardsList component', () => {
   it('should render two Cards', () => {
-    render(<MoviesList movies={cardsData} loading={false} />);
+    render(
+      <StoreContext>
+        <MemoryRouter>
+          <MoviesList movies={cardsData} loading={false} />
+        </MemoryRouter>
+      </StoreContext>
+    );
 
     expect(screen.getAllByTestId('мovieItem').length).toBe(2);
   });
 
   it('should render zero Cards when data is empty', () => {
-    render(<MoviesList movies={{ ids: [], entities: {}, total_pages: 0 }} loading={false} />);
+    render(
+      <StoreContext>
+        <MemoryRouter>
+          <MoviesList movies={{ ids: [], entities: {}, total_pages: 0 }} loading={false} />
+        </MemoryRouter>
+      </StoreContext>
+    );
 
     expect(screen.getByText(/Nothing found/i)).toBeInTheDocument();
   });
