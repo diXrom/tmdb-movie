@@ -1,22 +1,25 @@
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Button, Paper, Stack, Typography } from '@mui/material';
 
 import { fadeAnimation, initMotion } from 'shared/common/styles';
+import { useAppDispatch } from 'shared/store/model/hooks';
+import { personAdded } from 'shared/store/slices/personsSlice';
+import { getValue, submitForm } from './lib/util';
 import { FormStyle } from './lib/styles';
+import { IPersonData } from './lib/types';
 import { useForm } from './model/hooks';
-import { IForm } from './lib/types';
 import SelectGroup from './ui/SelectGroup';
 import CheckBoxGroup from './ui/CheckBoxGroup';
-import { getValue, submitForm } from './lib/util';
-
 import InputGroup from './ui/InputGroup';
 import SuccessSnack from './ui/SuccessSnack';
-import DateGrourp from './ui/DateGrourp';
 import UploadGroup from './ui/UploadGroup';
+import DateGroup from './ui/DateGrourp';
 
-const Form: FC<IForm> = ({ setData }) => {
+const Form = () => {
   const { inputMap, success, setSuccess } = useForm();
+  const dispatch = useAppDispatch();
+  const setData = (payload: IPersonData) => dispatch(personAdded(payload));
 
   return (
     <Paper
@@ -38,7 +41,7 @@ const Form: FC<IForm> = ({ setData }) => {
         </Typography>
         <InputGroup state={inputMap[0]} label="First Name" />
         <InputGroup state={inputMap[1]} label="Last Name" />
-        <DateGrourp state={inputMap[2]} label="Birthday" />
+        <DateGroup state={inputMap[2]} label="Birthday" />
         <SelectGroup state={inputMap[3]} label="Country" />
         <CheckBoxGroup switchState={inputMap[5]} checkboxState={inputMap[6]} />
         <UploadGroup state={inputMap[4]} />

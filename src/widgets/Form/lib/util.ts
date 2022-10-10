@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 import { IInput, IPersonData } from './types';
 
@@ -7,6 +8,7 @@ const getValue = ({ name, input }: IInput) => {
 };
 
 const getPersonData = (arr: IInput[]) => ({
+  id: nanoid(),
   name: arr[0].input.value,
   surName: arr[1].input.value,
   birthday: new Date((arr[2].input.value as dayjs.Dayjs).valueOf()).toLocaleDateString(),

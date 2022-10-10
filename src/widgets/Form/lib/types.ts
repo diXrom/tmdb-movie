@@ -18,9 +18,6 @@ interface IInput {
   input: IInputState;
   setInput: Dispatch<SetStateAction<IInputState>>;
 }
-interface IForm {
-  setData: (payload: IPersonData) => void;
-}
 
 interface ISelectGroup {
   selectRef: IInput;
@@ -46,7 +43,6 @@ interface ISuccessSnack {
 
 export type {
   IInput,
-  IForm,
   IPersonData,
   ISelectGroup,
   IInputGroup,
