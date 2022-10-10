@@ -1,16 +1,16 @@
-import { memo, useState, useContext } from 'react';
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Stack, Typography } from '@mui/material';
 
 import MoviesList from 'widgets/MoviesList';
 import { fadeAnimation, initMotion } from 'shared/common/styles';
-import { Context } from 'shared/storeContext';
 import { useGetMoviesQuery, useSearchMoviesQuery } from 'shared/api';
+import { allMoviesSelector } from 'shared/store/lib/selectors';
+import { useAppSelector } from 'shared/store/model/hooks';
 import MoviesControl from './ui/MoviesControl';
 
 const Movies = () => {
-  const { filter: sort_by, search: query } = useContext(Context)!;
-  const [page, setPage] = useState(1);
+  const { page, search: query, filter: sort_by } = useAppSelector(allMoviesSelector);
   const { data: movies, isFetching: isLoading } = useGetMoviesQuery({ page, sort_by });
   const { data: search, isFetching } = useSearchMoviesQuery({ query, page }, { skip: !query });
 
@@ -32,11 +32,7 @@ const Movies = () => {
         Movies
       </Typography>
       <Stack spacing={2} sx={{ justifyContent: 'center', alignItems: 'center' }}>
-        <MoviesControl
-          page={page}
-          setPage={setPage}
-          totalPage={query ? search?.total_pages : movies?.total_pages}
-        />
+        <MoviesControl page={page} totalPage={query ? search?.total_pages : movies?.total_pages} />
         <MoviesList movies={query ? search : movies} loading={query ? isFetching : isLoading} />
       </Stack>
     </Stack>

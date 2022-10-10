@@ -5,15 +5,14 @@ import Filters from './Filters';
 import Pages from './Pages';
 import { motion } from 'framer-motion';
 import { fadeAnimation, initMotion } from 'shared/common/styles';
+import { useAppDispatch } from 'shared/store/model/hooks';
+import { setPage } from 'shared/store/slices/moviesSlice';
 
-type IMoviesControl = {
-  page: number;
-  totalPage?: number;
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-};
+type IMoviesControl = { page: number; totalPage?: number };
 
-const MoviesControl = ({ page, totalPage, setPage }: IMoviesControl) => {
-  const handleChange = (e: ChangeEvent<unknown>, value: number) => setPage(value);
+const MoviesControl = ({ page, totalPage }: IMoviesControl) => {
+  const dispatch = useAppDispatch();
+  const handlePage = (e: ChangeEvent<unknown>, value: number) => dispatch(setPage(value));
 
   if (!totalPage) return null;
 
@@ -31,7 +30,7 @@ const MoviesControl = ({ page, totalPage, setPage }: IMoviesControl) => {
         color="primary"
         count={totalPage && totalPage > 20 ? 20 : totalPage}
         page={page}
-        onChange={handleChange}
+        onChange={handlePage}
         shape="rounded"
         size="large"
         sx={{ display: 'flex', justifyContent: 'center' }}

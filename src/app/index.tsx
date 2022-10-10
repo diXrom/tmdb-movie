@@ -6,16 +6,13 @@ import { setupStore } from 'shared/store';
 import ErrorBoundary from 'widgets/Error';
 import Routes from './ui/Routes';
 import { theme } from './lib/styles';
-import StoreContext from 'widgets/Context';
 
 const App = () => (
   <CssBaseline>
     <Provider store={setupStore()}>
       <ThemeProvider theme={theme}>
         <ErrorBoundary>
-          <StoreContext>
-            <Routes />
-          </StoreContext>
+          <Routes />
         </ErrorBoundary>
       </ThemeProvider>
     </Provider>
