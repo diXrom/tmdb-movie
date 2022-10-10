@@ -7,7 +7,6 @@ import MainPage from 'pages/MainPage';
 import { MOCK_API_RESPONSE } from 'shared/common/constants';
 import { renderWithProviders } from 'shared/store/lib/util';
 import { API_IMG } from 'shared/api/model/constants';
-import StoreContext from 'widgets/Context';
 
 describe('MainPage component', () => {
   beforeEach((): void => {
@@ -16,11 +15,7 @@ describe('MainPage component', () => {
 
   it('should render spinner before response', async () => {
     fetchMock.mockResponse(JSON.stringify(MOCK_API_RESPONSE));
-    renderWithProviders(
-      <StoreContext>
-        <MainPage />
-      </StoreContext>
-    );
+    renderWithProviders(<MainPage />);
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
   });

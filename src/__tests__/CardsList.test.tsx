@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import StoreContext from 'widgets/Context';
+import { setupStore } from 'shared/store';
 
 import MoviesList from 'widgets/MoviesList';
 
@@ -48,11 +49,11 @@ const cardsData = {
 describe('CardsList component', () => {
   it('should render two Cards', () => {
     render(
-      <StoreContext>
+      <Provider store={setupStore()}>
         <MemoryRouter>
           <MoviesList movies={cardsData} loading={false} />
         </MemoryRouter>
-      </StoreContext>
+      </Provider>
     );
 
     expect(screen.getAllByTestId('мovieItem').length).toBe(2);
@@ -60,11 +61,11 @@ describe('CardsList component', () => {
 
   it('should render zero Cards when data is empty', () => {
     render(
-      <StoreContext>
+      <Provider store={setupStore()}>
         <MemoryRouter>
           <MoviesList movies={{ ids: [], entities: {}, total_pages: 0 }} loading={false} />
         </MemoryRouter>
-      </StoreContext>
+      </Provider>
     );
 
     expect(screen.getByText(/Nothing found/i)).toBeInTheDocument();

@@ -1,16 +1,24 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { setupStore } from 'shared/store';
 import Form from 'widgets/Form';
 
 describe('Form component', () => {
+  const FormWitchProvider = (
+    <Provider store={setupStore()}>
+      <Form />
+    </Provider>
+  );
+
   it('should render Form', () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
 
     expect(screen.getByTestId('form')).toBeInTheDocument();
   });
 
   it('should render disable submit button', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const submitBtn = screen.getByTestId('formSubmit');
     const textInput = screen.getByTestId('inputFirstName');
 
@@ -23,7 +31,7 @@ describe('Form component', () => {
   });
 
   it('should render form validation when submit', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const submitBtn = screen.getByTestId('formSubmit');
     const inputFirstName = screen.getByTestId('inputFirstName');
 
@@ -37,7 +45,7 @@ describe('Form component', () => {
   });
 
   it('should render input text First Name', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const textInput = screen.getByTestId('inputFirstName');
 
     expect(textInput).toBeInTheDocument();
@@ -47,7 +55,7 @@ describe('Form component', () => {
   });
 
   it('should render input text Last Name', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const textInput = screen.getByTestId('inputLastName');
 
     expect(textInput).toBeInTheDocument();
@@ -57,7 +65,7 @@ describe('Form component', () => {
   });
 
   it('should render input text Birthday', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const dateInput = screen.getByTestId('inputBirthday');
 
     expect(dateInput).toBeInTheDocument();
@@ -67,7 +75,7 @@ describe('Form component', () => {
   });
 
   it('should render input select', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const selectInput = screen.getByTestId('inputCountry');
 
     expect(selectInput).toBeInTheDocument();
@@ -81,7 +89,7 @@ describe('Form component', () => {
   });
 
   it('should render input switch', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const switchInput = screen
       .getByTestId('inputSwitch')
       .querySelector('input[type="checkbox"]') as HTMLInputElement;
@@ -94,7 +102,7 @@ describe('Form component', () => {
   });
 
   it('should render input checkbox', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const checkboxInput = screen
       .getByTestId('inputCheckbox')
       .querySelector('input[type="checkbox"]') as HTMLInputElement;
@@ -107,7 +115,7 @@ describe('Form component', () => {
   });
 
   it('should render input file', async () => {
-    render(<Form setData={jest.fn()} />);
+    render(FormWitchProvider);
     const file = new File(['img'], 'img.png', { type: 'image/png' });
     const fileInput = screen.getByTestId('inputFile') as HTMLInputElement;
 

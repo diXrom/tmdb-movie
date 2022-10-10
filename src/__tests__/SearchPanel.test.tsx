@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 
 import SearchPanel from 'widgets/Header/ui/SearchPanel';
 import { setupStore } from 'shared/store';
-import StoreContext from 'widgets/Context';
 
 interface Store {
   [key: string]: string;
@@ -40,15 +39,13 @@ class LocalStorageMock {
   }
 }
 
-const Search = (
-  <Provider store={setupStore()}>
-    <StoreContext>
-      <SearchPanel />
-    </StoreContext>
-  </Provider>
-);
-
 describe('SearchPanel component', () => {
+  const Search = (
+    <Provider store={setupStore()}>
+      <SearchPanel />
+    </Provider>
+  );
+
   it('should render SearchPanel', () => {
     render(Search);
 
