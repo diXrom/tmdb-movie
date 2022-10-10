@@ -3,16 +3,21 @@ import type { PreloadedState } from '@reduxjs/toolkit';
 
 import { themoviedbAPI } from 'shared/api';
 import moviesSlice from './slices/moviesSlice';
+import personsSlice from './slices/personsSlice';
 
 const rootReducer = combineReducers({
   [themoviedbAPI.reducerPath]: themoviedbAPI.reducer,
   moviesSlice: moviesSlice.reducer,
+  personsSlice: personsSlice.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(themoviedbAPI.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(themoviedbAPI.middleware),
     preloadedState,
   });
 };

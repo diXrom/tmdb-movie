@@ -19,4 +19,4 @@ const transformResponse = {
   }),
 };
 
-export { prepareHeaders, transformResponse, initialState };
+export { prepareHeaders, transformResponse, initialState, moviesAdapter };
