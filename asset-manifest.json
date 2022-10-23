@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/tmdb-movie/static/css/main.7d5a97db.css",
+    "main.js": "/tmdb-movie/static/js/main.2b7f3cda.js",
+    "static/media/logo_RSS.svg": "/tmdb-movie/static/media/logo_RSS.81a79ebc80757e0dffe23f7a2258e44e.svg",
+    "index.html": "/tmdb-movie/index.html",
+    "main.7d5a97db.css.map": "/tmdb-movie/static/css/main.7d5a97db.css.map",
+    "main.2b7f3cda.js.map": "/tmdb-movie/static/js/main.2b7f3cda.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7d5a97db.css",
+    "static/js/main.2b7f3cda.js"
+  ]
+}
